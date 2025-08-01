@@ -1,8 +1,8 @@
-function Header({ onMenuClick }) {
+function Header({ aoClicarMenu }) {
   return (
-    <header className="flex items-center justify-between px-4 py-3 border-b bg-white shadow-sm md:hidden">
-      <button onClick={onMenuClick} className="text-2xl">☰</button>
-      <span className="text-blue-600 font-bold text-lg">LOJA Admin</span>
+    <header className="h-16 bg-white shadow flex items-center justify-between px-4 border-b">
+      <button className="text-2xl" onClick={aoClicarMenu}>☰</button>
+      <h1 className="text-blue-700 font-bold text-lg">LOJA <span className="text-gray-800">Admin</span></h1>
     </header>
   )
 }

@@ -4,27 +4,38 @@ function Sidebar({ aberta, onClose }) {
   const { pathname } = useLocation()
 
   const navItemClass = (path) =>
-    `flex items-center gap-2 px-4 py-2 rounded transition hover:bg-blue-100 ${
-      pathname === path ? 'bg-blue-200 font-semibold' : ''
+    `flex items-center gap-2 px-4 py-2 rounded hover:bg-blue-100 transition ${
+      pathname === path ? 'bg-blue-200 font-bold' : ''
     }`
 
   return (
-    <div
-      className={`fixed top-0 left-0 h-full w-64 bg-white border-r shadow-lg z-40 transform transition-transform duration-300 ${
-        aberta ? 'translate-x-0' : '-translate-x-full'
-      } md:translate-x-0 md:static md:shadow-none`}
-    >
-      <div className="flex items-center justify-between p-4 border-b">
-        <span className="font-bold text-blue-600 text-xl">LOJA Admin</span>
-        <button onClick={onClose} className="md:hidden text-xl">×</button>
+    <>
+      {/* Overlay escuro para qualquer resolução */}
+      <div
+        onClick={onClose}
+        className={`fixed inset-0 bg-black bg-opacity-30 z-20 transition-opacity duration-300 ${
+          aberta ? 'block' : 'hidden'
+        }`}
+      ></div>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed z-30 top-0 left-0 h-full w-64 bg-white border-r shadow-lg transform transition-transform duration-300 ${
+          aberta ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="flex items-center justify-between h-16 border-b px-4">
+          <span className="text-xl font-bold text-blue-700">LOJA Admin</span>
+          <button onClick={onClose} className="text-2xl text-gray-600">×</button>
+        </div>
+        <nav className="p-4 space-y-2">
+          <Link to="/dashboard" className={navItemClass('/')}>📊 Dashboard</Link>
+          <Link to="/projetos" className={navItemClass('/projetos')}>📁 Meus Projetos</Link>
+          <Link to="/servicos" className={navItemClass('/servicos')}>🛠 Meus Serviços</Link>
+          <button className="w-full text-left text-red-500 hover:underline mt-4">⎋ Sair</button>
+        </nav>
       </div>
-      <nav className="p-4 space-y-2">
-        <Link to="/" className={navItemClass('/')}>📊 Dashboard</Link>
-        <Link to="/projetos" className={navItemClass('/projetos')}>📁 Meus Projetos</Link>
-        <Link to="/servicos" className={navItemClass('/servicos')}>🛠 Meus Serviços</Link>
-        <button className="w-full text-left text-red-600 hover:underline mt-4">⎋ Sair</button>
-      </nav>
-    </div>
+    </>
   )
 }
 

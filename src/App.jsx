@@ -1,30 +1,64 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
-import Sidebar from './components/Sidebar'
-import Header from './components/Header'
+import AdminLayout from './layouts/AdminLayout'
+import PublicLayout from './layouts/PublicLayout'
+
 import Dashboard from './pages/Dashboard'
 import Projetos from './pages/Projetos'
 import Servicos from './pages/Servicos'
+import Login from './pages/Login'
+import Home from './pages/Home'
+
+import AuthLayout from './layouts/AuthLayout'
 
 function App() {
-  const [sidebarAberta, setSidebarAberta] = useState(false)
-
   return (
     <Router>
-      <div className="flex h-screen overflow-hidden">
-        <Sidebar aberta={sidebarAberta} onClose={() => setSidebarAberta(false)} />
+      <Routes>
+        {/* Rotas públicas */}
+        <Route
+          path="/login"
+          element={
+            <AuthLayout>
+              <Login />
+            </AuthLayout>
+          }
+        />
 
-        <div className="flex-1 flex flex-col transition-all">
-          <Header onMenuClick={() => setSidebarAberta(!sidebarAberta)} />
-          <main className="p-6 bg-gray-50 overflow-auto flex-1">
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/projetos" element={<Projetos />} />
-              <Route path="/servicos" element={<Servicos />} />
-            </Routes>
-          </main>
-        </div>
-      </div>
+        <Route
+          path="/"
+          element={
+            <PublicLayout>
+              <Home />
+            </PublicLayout>
+          }
+        />
+
+        {/* Rotas administrativas */}
+        <Route
+          path="/dashboard"
+          element={
+            <AdminLayout>
+              <Dashboard />
+            </AdminLayout>
+          }
+        />
+        <Route
+          path="/projetos"
+          element={
+            <AdminLayout>
+              <Projetos />
+            </AdminLayout>
+          }
+        />
+        <Route
+          path="/servicos"
+          element={
+            <AdminLayout>
+              <Servicos />
+            </AdminLayout>
+          }
+        />
+      </Routes>
     </Router>
   )
 }
