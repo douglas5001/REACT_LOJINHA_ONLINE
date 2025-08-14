@@ -9,6 +9,8 @@ import Projetos from "./pages/Projetos";
 import Servicos from "./pages/Servicos";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Users from "./pages/Users";
+import MenuAdmin from "./pages/MenuAdmin";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/dashboard" element={<Protected><AdminLayout><Dashboard /></AdminLayout></Protected>} />
           <Route path="/projetos" element={<Protected><AdminLayout><Projetos /></AdminLayout></Protected>} />
           <Route path="/servicos" element={<Protected><AdminLayout><Servicos /></AdminLayout></Protected>} />
+          <Route path="/usuarios" element={<Protected><AdminLayout><Users /></AdminLayout></Protected>} />
+          <Route path="/menu-admin" element={<Protected><AdminLayout><MenuAdmin /></AdminLayout></Protected>} />
         </Routes>
       </Router>
     </AuthProvider>
